@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-
   before(:all) do
     @goodUser = User.create(username: "sam", email: "s@s.com", password: "password1")
   end
@@ -21,6 +19,7 @@ RSpec.describe User, type: :model do
       expect(duplicatename.valid?).to eq(false)
     end
   end
+
   describe "Email" do
     it "has email" do
       expect(@goodUser.email).to eq("s@s.com")
@@ -33,8 +32,8 @@ RSpec.describe User, type: :model do
       duplicateemail = User.create(username: "Sam", email:"s@s.com", password: "Password")
       expect(duplicateemail.valid?).to eq(false)
     end
-
   end
+
   describe "password" do
     it "has a password" do
       expect(!!@goodUser.authenticate("password1")).to be(true)
@@ -45,5 +44,6 @@ RSpec.describe User, type: :model do
       expect(nopassword.valid?).to eq(false)
     end
   end
+  
   # forms
 end
