@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_224444) do
+ActiveRecord::Schema.define(version: 2021_11_16_124338) do
 
   create_table "forms", force: :cascade do |t|
     t.integer "user_id"
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 2021_11_15_224444) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_forms_on_user_id"
+  end
+
+  create_table "inputs", force: :cascade do |t|
+    t.string "inputType"
+    t.string "label"
+    t.string "name"
+    t.boolean "required", default: false
+    t.integer "form_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["form_id"], name: "index_inputs_on_form_id"
   end
 
   create_table "users", force: :cascade do |t|
