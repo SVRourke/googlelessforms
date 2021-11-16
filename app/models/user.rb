@@ -5,3 +5,8 @@ class User < ApplicationRecord
     # has many forms
 
 end
+
+# Attributes
+# username
+# email
+# password_digest
