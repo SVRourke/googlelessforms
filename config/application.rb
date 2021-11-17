@@ -12,7 +12,7 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
-require "sprockets/railtie"
+# require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -24,12 +24,6 @@ module Googlelessforms
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
-    # TEMPORARY FIX FOR EXCESSIVE ROUTES
-    initializer(:remove_action_mailbox_and_activestorage_routes, after: :add_routing_paths) { |app|
-      app.routes_reloader.paths.delete_if {|path| path =~ /activestorage/}
-      app.routes_reloader.paths.delete_if {|path| path =~ /actionmailbox/ }
-    }
-
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -38,7 +32,9 @@ module Googlelessforms
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
   end
 end
