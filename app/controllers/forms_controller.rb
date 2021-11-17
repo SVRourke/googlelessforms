@@ -6,14 +6,11 @@ class FormsController < ApplicationController
     
     def show
         @form = Form.find(params[:id])
-        # get form id
-        # get form
         # get submissions
         # render form page
     end
     
     def new
-        render json: {message: "New"}
         # render new form page
     end
     
