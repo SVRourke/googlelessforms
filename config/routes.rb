@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     delete "login", to: "auth#destroy"
 
   # Users
-  resource :user, only: [:new, :create, :destroy] do
+  # TODO: add destroy
+  resource :user, only: [:new, :create] do
     resource :forms, only: [:index, :show, :new, :create, :destroy]
   end
 
