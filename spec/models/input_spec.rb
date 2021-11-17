@@ -93,5 +93,7 @@ RSpec.describe Input, inputType: :model do
     # name is required
   # form
     # belongs to a form
+
+  # inputs are deleted if the parent form is deleted
   # TODO FININSH WRITING TESTS
 end

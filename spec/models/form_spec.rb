@@ -6,4 +6,5 @@ RSpec.describe Form, type: :model do
   # has inputs
   # belongs to a user
   # user cannot create duplicate named forms
+  # form is deleted when the owning user is deleted
 end
