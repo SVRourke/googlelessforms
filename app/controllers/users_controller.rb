@@ -1,18 +1,18 @@
 class UsersController < ApplicationController
-    def new
-        @user = User.new()
-    end
-
     def create
         # try to create user
-        user = User.create(username: params[:username], email: params[:email], password: params[:password])
+        user = User.new(strong_params)
 
         if user.save()
-            session[:user_id] = user.id
-            redirect_to :user_forms
+            render json: user
         else
-            flash[:error] = user.errors.full_messages
-            redirect_back(fallback_location: new_user_path)
+            render json: {error: user.errors.full_messages}
         end
+    end
+
+    private
+
+    def strong_params
+        params.require(:user).permit(:username, :email, :password)
     end
 end
