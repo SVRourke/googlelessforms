@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   # Users
   # TODO: add destroy
   resources :users, only: [:create] do
-    resources :forms, only: [:index, :show, :create, :destroy]
+    resources :forms, only: [:index, :show, :create, :destroy] do
+      resources :inputs, only: [:index, :create, :destroy]
+    end
   end
 
   resource :form, only: [] do
