@@ -7,8 +7,7 @@ class FormsController < ApplicationController
     end
     
     def show
-        user = User.find(params[:user_id])
-        form = user.forms.find(params[:id])
+        form = Form.find_by(user_id: params[:user_id], id: params[:id])
 
         if form
             render json: form
@@ -16,7 +15,6 @@ class FormsController < ApplicationController
             render json: {error: "form not found"}
         end
         # get submissions
-        # render form page
     end
         
     def create
@@ -34,9 +32,9 @@ class FormsController < ApplicationController
     end
     
     def destroy
-        render json: {message: "Destroy"}
-        # get form
-        # detroy form
+        form = Form.find_by(user_id: params[:user_id], id: params[:id])
+        form.destroy()
+        render json: {message: "Form removed"}
     end
 
     private
