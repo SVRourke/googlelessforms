@@ -1,29 +1,47 @@
 class FormsController < ApplicationController
     def index
-        @user = current_user
-        @forms = @user.forms
+        user = User.find(params[:user_id])
+        forms = user.forms
+
+        render json: forms
     end
     
     def show
-        @form = Form.find(params[:id])
+        user = User.find(params[:user_id])
+        form = user.forms.find(params[:id])
+
+        if form
+            render json: form
+        else
+            render json: {error: "form not found"}
+        end
         # get submissions
         # render form page
     end
-    
-    def new
-        # render new form page
-    end
-    
+        
     def create
-        render json: {message: "CREATE"}
-        # get body
-        # generate form and inputs for body
-        # redirect to form show for new form
+        # separate action for adding inputs,
+        # front end will add and remove inputs through input controller
+
+        user = User.find(params[:user_id])
+        form = user.forms.new(form_params)
+        
+        if form.save()
+            render json: form
+        else
+            render json: form.errors.full_messages
+        end
     end
     
     def destroy
         render json: {message: "Destroy"}
         # get form
         # detroy form
+    end
+
+    private
+
+    def form_params
+        params.require(:form).permit(:title)
     end
 end
