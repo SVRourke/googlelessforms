@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_124338) do
+ActiveRecord::Schema.define(version: 2021_11_19_130121) do
 
   create_table "forms", force: :cascade do |t|
     t.integer "user_id"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(version: 2021_11_16_124338) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "value_options", force: :cascade do |t|
+    t.integer "input_id"
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["input_id"], name: "index_value_options_on_input_id"
   end
 
 end
