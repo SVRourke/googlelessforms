@@ -1,7 +1,7 @@
 class InputsController < ApplicationController
     def index
         inputs = Input.where(form_id: params[:form_id])
-        render json: inputs
+        render json: InputSerializer.new(inputs).to_json
     end
     
     def create
