@@ -3,14 +3,15 @@ class FormsController < ApplicationController
         user = User.find(params[:user_id])
         forms = user.forms
 
-        render json: forms
+        # render json: forms
+        render json: FormSerializer.new(forms).serializable_hash.to_json
     end
     
     def show
         form = Form.find_by(user_id: params[:user_id], id: params[:id])
-
+        
         if form
-            render json: form
+            render json: ShowFormSerializer.new(form).serializable_hash.to_json
         else
             render json: {error: "form not found"}
         end
