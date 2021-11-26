@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :form, only: [] do
+  resources :form, only: [] do
     resource :submissions, only: [:create]
   end
 
