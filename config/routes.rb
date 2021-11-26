@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create] do
     resources :forms, only: [:index, :show, :create, :destroy] do
       resources :inputs, only: [:index, :create, :destroy]
+      resources :submissions, only: [:index, :destroy]
     end
   end
 
