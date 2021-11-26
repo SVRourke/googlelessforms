@@ -13,10 +13,12 @@
 ActiveRecord::Schema.define(version: 2021_11_24_210202) do
 
   create_table "answers", force: :cascade do |t|
+    t.integer "submission_id"
     t.string "name"
     t.string "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["submission_id"], name: "index_answers_on_submission_id"
   end
 
   create_table "forms", force: :cascade do |t|
