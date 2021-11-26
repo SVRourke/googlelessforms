@@ -1,7 +1,8 @@
 class SubmissionsController < ApplicationController
     def index
         submissions = Submission.where(form_id: params[:form_id])
-        render json: submissions, :include => :answers    
+        # render json: submissions, :include => :answers    
+        render json: SubmissionSerializer.new(submissions).serializable_hash.to_json
     end
 
     def create
@@ -13,6 +14,14 @@ class SubmissionsController < ApplicationController
         else
             render json: sub.errors.full_messages
         end
+    end
+
+    def destroy
+        submission = Submission.find(params[:id])
+        
+        submission.destroy()
+
+        render json: {message: "Removed Submission"}
     end
 
     private
